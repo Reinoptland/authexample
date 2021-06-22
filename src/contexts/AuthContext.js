@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const authContext = createContext({});
 
@@ -15,12 +15,17 @@ export const authContext = createContext({});
 // - [x] Bedenk welke data je in de context beschikbaar moet stellen
 // - [x] Maak de lege functies voor login en logOut
 // - [x] Maak de state aan voor de gebruikersdata en de statusdata (user => null en status => 'pending')
-// - [ ] Maak ook alvast een useEffect functie die de status op 'done' zet als de app gerefreshed wordt (mounting cycle)
-// - [ ] Zorg ervoor dat we alleen de applicatie (dus de children) laten zien als de status op 'done' staat
-// - [ ] Plaats de state en lege functies in het data object
+// - [x] Maak ook alvast een useEffect functie die de status op 'done' zet als de app gerefreshed wordt (mounting cycle)
+// - [x] Zorg ervoor dat we alleen de applicatie (dus de children) laten zien als de status op 'done' staat
+// - [x] Plaats de state en lege functies in het data object
 
 function AuthContextProvider(props) {
   const [authState, setAuthState] = useState({ user: null, status: "pending" });
+
+  useEffect(() => {
+    // @todo we proberen automatische in te loggen wanneer we nog een token hebben (later)
+    setTimeout(() => setAuthState({ user: null, status: "done" }), 2000);
+  }, []);
 
   function login() {
     // @todo
@@ -31,12 +36,14 @@ function AuthContextProvider(props) {
     // @todo
   }
 
-  const data = {};
+  // deze data maken we beschikbaar in de context
+  const data = { authState: authState, login: login, logout: logout };
 
   return (
     <authContext.Provider value={data}>
       {/* Hier komt de rest van onze app */}
-      {props.children}
+      {authState.status === "pending" && <h1>Fetching you data! Hold on</h1>}
+      {authState.status === "done" && props.children}
     </authContext.Provider>
   );
 }

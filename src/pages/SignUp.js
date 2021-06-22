@@ -78,7 +78,7 @@ function SignUp() {
               {...register("password")}
             />
           </label>
-          <button disable={loading} type="submit" className="form-button">
+          <button disabled={loading} type="submit" className="form-button">
             Maak account aan
           </button>
         </form>
