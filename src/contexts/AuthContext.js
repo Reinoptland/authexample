@@ -32,7 +32,7 @@ function AuthContextProvider(props) {
       login(token);
     } else {
       setAuthState({ user: null, status: "done" });
-      history.push("/signin");
+      history.push("/");
     }
   }, []);
 
