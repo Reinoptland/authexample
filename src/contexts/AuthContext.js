@@ -83,7 +83,8 @@ function AuthContextProvider(props) {
     const dataFromToken = jwt_decode(token);
     console.log("WHAT IS IN THIS TOKEN THIING?", dataFromToken.sub);
     const userId = dataFromToken.sub;
-    const userData = await getUserData(userId, token);
+
+    getUserData(userId, token);
 
     // @todo
     // setAuthState({ user: "rein" });
