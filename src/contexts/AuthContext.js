@@ -31,9 +31,8 @@ function AuthContextProvider(props) {
     setTimeout(() => setAuthState({ user: null, status: "done" }), 2000);
   }, []);
 
-  async function getUserData(id) {
+  async function getUserData(id, token) {
     setAuthState({ user: null, status: "pending" });
-    const token = localStorage.getItem("token");
     try {
       const response = await axios.get(
         `http://localhost:3000/600/users/${id}`,
@@ -83,7 +82,8 @@ function AuthContextProvider(props) {
     localStorage.setItem("token", token);
     const dataFromToken = jwt_decode(token);
     console.log("WHAT IS IN THIS TOKEN THIING?", dataFromToken.sub);
-    const userData = await getUserData(dataFromToken.sub);
+    const userId = dataFromToken.sub;
+    const userData = await getUserData(userId, token);
 
     // @todo
     // setAuthState({ user: "rein" });
