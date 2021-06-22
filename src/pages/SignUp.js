@@ -27,6 +27,7 @@ function SignUp() {
         email: data.email,
         username: data.username,
         password: data.password,
+        favoriteThing: "Programming stuff",
       });
       console.log(response);
       setSucces(true);
