@@ -27,7 +27,8 @@ function AuthContextProvider(props) {
     setTimeout(() => setAuthState({ user: null, status: "done" }), 2000);
   }, []);
 
-  function login() {
+  function login(token) {
+    console.log("DO WE HAVE A TOKEN NAO?", token);
     // @todo
     // setAuthState({ user: "rein" });
   }
