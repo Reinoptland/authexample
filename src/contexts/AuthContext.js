@@ -80,6 +80,9 @@ function AuthContextProvider(props) {
 
   function logout() {
     // @todo
+    localStorage.removeItem("token");
+    setAuthState({ user: null, status: "done" });
+    history.push("/");
   }
 
   // deze data maken we beschikbaar in de context
