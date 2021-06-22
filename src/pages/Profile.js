@@ -8,19 +8,20 @@ import { authContext } from "../contexts/AuthContext";
 // - [x] Als er data is, geef die dan weer op de pagina (dus inclusief impliciete check!)
 
 function Profile() {
-  const authInfo = useContext(authContext);
-  console.log("USER STUFF IN PROFILE:", authInfo.authState.user);
+  const {
+    authState: { user },
+  } = useContext(authContext);
+  console.log("USER STUFF IN PROFILE:", user);
   return (
     <>
       <h1>Profielpagina</h1>
       <section>
         <h2>Gegevens</h2>
         <p>
-          <strong>Gebruikersnaam:</strong>{" "}
-          {authInfo.authState.user && authInfo.authState.user.username}
+          <strong>Gebruikersnaam:</strong> {user && user.username}
         </p>
         <p>
-          <strong>Email:</strong> {authInfo.authState.user?.email}
+          <strong>Email:</strong> {user?.email}
         </p>
       </section>
       <section>
