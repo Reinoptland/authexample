@@ -1,6 +1,6 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 function SignIn() {
   const { handleSubmit, register } = useForm();
@@ -12,7 +12,10 @@ function SignIn() {
   return (
     <>
       <h1>Inloggen</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias cum debitis dolor dolore fuga id molestias qui quo unde?</p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias cum
+        debitis dolor dolore fuga id molestias qui quo unde?
+      </p>
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="email-field">
@@ -34,14 +37,14 @@ function SignIn() {
             {...register("password")}
           />
         </label>
-        <button
-          type="submit"
-          className="form-button"
-        >
+        <button type="submit" className="form-button">
           Inloggen
         </button>
       </form>
-      <p>Heb je nog geen account? <Link to="/signup">Registreer</Link> je dan eerst.</p>
+      <p>
+        Heb je nog geen account? <Link to="/signup">Registreer</Link> je dan
+        eerst.
+      </p>
     </>
   );
 }
