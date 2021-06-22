@@ -28,7 +28,22 @@ function AuthContextProvider(props) {
   }, []);
 
   function login(token) {
+    // - [x] Zorg ervoor dat de inlogfunctie uit de context de JWT token kan ontvangen
+    // - [x] Zet de token in de local storage
+    // - [ ] Haal alle belangrijke informatie uit de token (dit is voor iedere situatie anders! Sommige backends sturen direct de gebruikersdata mee terug!)
+    //    - [ ] Installeer jwt-decode
+    //    - [ ] Importeer jwt-decode
+    //    - [ ] Decode de token en en haal de user id eruit (die hebben we in ons geval nodig voor de gebruikersdata)
+    // -  [ ] Haal de gebruikersgegevens op
+    //    - [ ] Importeer axios
+    //    - [ ] Maak een aparte asynchrone functie (deze hebben we straks vaker nodig!)
+    //    - [ ] Roep die functie aan vanuit de login functie
+    //    - [ ] Maak een try / catch blok
+    //    - [ ] In de try: maak een axios GET request naar het eindpoint http://localhost:3000/600/users/${id} en stuur de token mee
+    //    - [ ] De data die we terugkrijgen zetten we in de state, en daarmee ook in de context (user: al die data en status: 'done')
+    //    - [ ] Link gebruiker door naar de profielpagina
     console.log("DO WE HAVE A TOKEN NAO?", token);
+    localStorage.setItem("token", token);
     // @todo
     // setAuthState({ user: "rein" });
   }
