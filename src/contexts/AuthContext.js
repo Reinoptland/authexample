@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 export const authContext = createContext({});
 
@@ -22,6 +23,7 @@ export const authContext = createContext({});
 // - [x] Plaats de state en lege functies in het data object
 
 function AuthContextProvider(props) {
+  const history = useHistory();
   const [authState, setAuthState] = useState({ user: null, status: "pending" });
 
   useEffect(() => {
@@ -43,6 +45,7 @@ function AuthContextProvider(props) {
       );
 
       setAuthState({ user: response.data, status: "done" });
+      history.push("/profile");
 
       // Authorized POST request
       // const response2 = await axios.post(
@@ -75,7 +78,7 @@ function AuthContextProvider(props) {
     //    - [x] Maak een try / catch blok
     //    - [x] In de try: maak een axios GET request naar het eindpoint http://localhost:3000/600/users/${id} en stuur de token mee
     //    - [x] De data die we terugkrijgen zetten we in de state, en daarmee ook in de context (user: al die data en status: 'done')
-    //    - [ ] Link gebruiker door naar de profielpagina
+    //    - [x] Link gebruiker door naar de profielpagina
     console.log("DO WE HAVE A TOKEN NAO?", token);
     localStorage.setItem("token", token);
     const dataFromToken = jwt_decode(token);
