@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { authContext } from "../contexts/AuthContext";
+import axios from "axios";
 
 // - [x] Importeeer de useContext functie en AuthContext
 // - [x] Destucture daar het user object uit
@@ -12,10 +13,10 @@ import { authContext } from "../contexts/AuthContext";
 //    - [x] Importeer useEffect
 //    - [x] Schrijf de useEffect functie en geef de lege dependency array mee
 // - [ ] Om data op te halen hebben we een asynchrone functie nodig, dus:
-//    - [ ] Importeer axios
-//    - [ ] Maak een asynchrone functie in de useEffect en roep hem ook direct aan
-//    - [ ] Maak een try / catch blok
-//    - [ ] Om beschermde data op te halen hebben we de token nodig! Haal 'm uit de local storage
+//    - [x] Importeer axios
+//    - [x] Maak een asynchrone functie in de useEffect en roep hem ook direct aan
+//    - [x] Maak een try / catch blok
+//    - [x] Om beschermde data op te halen hebben we de token nodig! Haal 'm uit de local storage
 //    - [ ] In de try: maak een GET request naar het beveiligde eindpoint: http://localhost:3000/660/private-content
 //    - [ ] Een GET request krijgt altijd de url en het config object mee (waarin je request headers - de token! - meegeeft)
 //    - [ ] Bekijk de response. Als het succesvol was, plaats dan de response in de state
@@ -29,7 +30,24 @@ function Profile() {
   console.log("USER STUFF IN PROFILE:", user);
 
   useEffect(() => {
-    console.log("FETCH DATA IN PROFILE");
+    async function fetchPrivateStuff() {
+      console.log("FETCH DATA IN PROFILE");
+      try {
+        const token = localStorage.getItem("token");
+        console.log(token);
+        const response = await axios.get(
+          "http://localhost:3000/660/private-content",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log("WAT IS IN THIS RESPONSE?", response);
+      } catch (error) {}
+    }
+
+    fetchPrivateStuff();
   }, []);
   return (
     <>
